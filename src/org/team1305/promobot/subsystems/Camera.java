@@ -25,6 +25,10 @@ import org.team1305.promobot.commands.CameraInactive;
 public class Camera extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+    final String SMART_DASH_HOT_TARGET_RESULT = "SmartDashHotTargetResult";
+    int hotCount = 0;
+    int totalCount = 0;
+    final int CAMERA_BRIGHTNESS = 30;
     
     //Camera constants used for distance calculation
     final int Y_IMAGE_RES = 480;		//X Image resolution in pixels, should be 120, 240 or 480
@@ -86,13 +90,15 @@ public class Camera extends Subsystem {
     public Camera()
     {
        System.out.println("---newing up Camera ---");
+       SmartDashboard.putNumber("Hot Count", hotCount);
+       SmartDashboard.putNumber("Total Count", totalCount);
        
         //cameraLights.set(Relay.Value.kReverse);
                 cameraLights.set(true);
         camera = AxisCamera.getInstance();  // get an instance of the camera
         cc = new CriteriaCollection();      // create the criteria for the particle filter
         cc.addCriteria(NIVision.MeasurementType.IMAQ_MT_AREA, AREA_MINIMUM, 65535, false);
-        
+        camera.writeBrightness(CAMERA_BRIGHTNESS);
 //        int verticalTargets[] = new int[MAX_PARTICLES];
 //	int horizontalTargets[] = new int[MAX_PARTICLES];
 //	int verticalTargetCount, horizontalTargetCount;
@@ -113,7 +119,10 @@ public class Camera extends Subsystem {
     public void analyzeImage(){
         //System.out.println("---Begin Camera report--- done = " + done);
        //waitASec(2); 
-       if (isAlreadyRunning()){
+        if (camera.freshImage() == false){
+            System.out.println("Analyzed image already, please get a new one and try again.");
+        }
+        else if (isAlreadyRunning()){
            System.out.println("---Camera already running - try again later ---");
        }
        else
@@ -135,13 +144,19 @@ public class Camera extends Subsystem {
              //image = new RGBImage("/testImage.jpg");		// get the sample image from the cRIO flash
                 
                  //************************
-             final int HUE_MIN = 85;
+           /*  final int HUE_MIN = 85;
             final int HUE_MAX = 172;
             final int SATURATION_MIN = 0;
             final int SATURATION_MAX = 255;
             final int LUMINANCE_MIN = 148;
             final int LUMINANCE_MAX = 255;
-
+*/
+            final int HUE_MIN = 29;    
+            final int HUE_MAX = 198;
+            final int SATURATION_MIN = 0;
+            final int SATURATION_MAX = 255;
+            final int LUMINANCE_MIN = 138;
+            final int LUMINANCE_MAX = 255;
              //************************
             BinaryImage thresholdImage = image.thresholdHSL(HUE_MIN, HUE_MAX, SATURATION_MIN, SATURATION_MAX, LUMINANCE_MIN, LUMINANCE_MAX);
             
@@ -235,11 +250,20 @@ public class Camera extends Subsystem {
                                  double distance = computeDistance(filteredImage, distanceReport, target.verticalIndex);
                                  if(target.Hot)
                                  {
+                                         hotCount = hotCount+1;
+                                         totalCount = totalCount+1;
                                          System.out.println("Hot target located");
+                                         SmartDashboard.putString(SMART_DASH_HOT_TARGET_RESULT, "Hot target located");
+                                         SmartDashboard.putNumber("Hot Count", hotCount);
+                                         SmartDashboard.putNumber("Total Count", totalCount);
                                          System.out.println("Distance: " + distance);
                                          this.SetIndicatorLights(true, false, false);
                                  } else {
+                                         totalCount = totalCount+1;
                                          System.out.println("No hot target present");
+                                         SmartDashboard.putString(SMART_DASH_HOT_TARGET_RESULT, "Not Hot");
+                                         SmartDashboard.putNumber("Hot Count", hotCount);
+                                         SmartDashboard.putNumber("Total Count", totalCount);
                                          System.out.println("Distance: " + distance);
                                          this.SetIndicatorLights(false, false, true);
                                  }
