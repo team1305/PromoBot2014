@@ -1,0 +1,6 @@
+MIDlet-Name: Team1305PromoBot
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: FIRST
+MIDlet-1: PromoBot, , org.team1305.promobot.PromoBot
+MicroEdition-Profile: IMP-1.0
+MicroEdition-Configuration: CLDC-1.1
