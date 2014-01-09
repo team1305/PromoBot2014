@@ -19,5 +19,5 @@ public class RobotMap {
     
     //PWM channels
     public static final int PORT_LEFMOTOR = 1;
-    public static final int PORT_RIGHTMOTOR = 1;
+    public static final int PORT_RIGHTMOTOR = 2;
 }
