@@ -18,6 +18,14 @@ public class RobotMap {
     // public static final int rangefinderModule = 1;
     
     //PWM channels
-    public static final int PORT_LEFMOTOR = 1;
-    public static final int PORT_RIGHTMOTOR = 2;
+     public static final int PWM_LEFT_FRONT_DRIVE_MOTOR = 1;
+    public static final int PWM_LEFT_REAR_DRIVE_MOTOR = 2;
+   // public static final int PWM_RIGHT_FRONT_DRIVE_MOTOR = 3;
+ //   public static final int PWM_RIGHT_REAR_DRIVE_MOTOR = 4;
+    
+    
+    //Joystick Button Mappings
+    public static final int JOY_ARCADE_DRIVE_TURN_AXIS = 3;
+    public static final int JOY_ARCADE_DRIVE_MOVE_AXIS = 1;
+    
 }
