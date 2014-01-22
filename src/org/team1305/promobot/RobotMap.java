@@ -20,6 +20,8 @@ public class RobotMap {
     //PWM channels
      public static final int PWM_LEFT_FRONT_DRIVE_MOTOR = 1;
     public static final int PWM_LEFT_REAR_DRIVE_MOTOR = 2;
+    public static final int PWM_RIGHT_FRONT_DRIVE_MOTOR = 3;
+    public static final int PWM_RIGHT_REAR_DRIVE_MOTOR = 4;
    // public static final int PWM_RIGHT_FRONT_DRIVE_MOTOR = 3;
  //   public static final int PWM_RIGHT_REAR_DRIVE_MOTOR = 4;
     
