@@ -1,0 +1,29 @@
+To get the most recent version of the source code before you start changing anything:
+
+1. Team > Remote > Pull...
+2. select configured git repository....
+3. select master -> origin/master
+4. click finish. 
+
+You now have the most recent version of the code! Make sure you commit when you're done whatever you're doing!
+HELlO THIS IS DOG
+
+PSADOKFJ;ALSDKFJ;ASDLFPAUL
+
+To properly upload the changes you have made to your code, please do the following:
+
+1. Team > Commit...
+2. Write a meaningful commit message outlining what you've done
+3. Click the 'Commit' button
+4. Team > Remote > Push...
+5. select configured git repository location: origin:https://git.assembla.com/team1305frc2013.git
+6. select master -> master
+7. select master -> origin/master
+8. click finish
+
+And now your changes have been applied to the git repository!
+
+Please try not to upload broken code; You can team > Commit many times, but only push your changes upstream 
+if the code is in a usable state. 
+
+PAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAULPAUL

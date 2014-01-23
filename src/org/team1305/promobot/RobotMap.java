@@ -17,7 +17,15 @@ public class RobotMap {
     // public static final int rangefinderPort = 1;
     // public static final int rangefinderModule = 1;
     
-    //PWM channels
+    
+    //non-port-related constants
+    public static double LOW_GEAR_SCALING_FACTOR = 0.6;
+    public static final String CAMERA_IP = "10.13.5.11";
+    public static  final String cameraXAxisOffsetShareName = "X offset";
+    public static  final String cameraYAxisOffsetShareName = "Y offset";
+    public static final String cameraParticleCountShareName = "Camera Particle Count";
+    
+//PWM channels
      public static final int PWM_LEFT_FRONT_DRIVE_MOTOR = 1;
     public static final int PWM_LEFT_REAR_DRIVE_MOTOR = 2;
     public static final int PWM_RIGHT_FRONT_DRIVE_MOTOR = 3;
@@ -29,5 +37,11 @@ public class RobotMap {
     //Joystick Button Mappings
     public static final int JOY_ARCADE_DRIVE_TURN_AXIS = 3;
     public static final int JOY_ARCADE_DRIVE_MOVE_AXIS = 1;
+    
+    //Solenoid Ports (note Solenoid breakout plugs into slot 3 on CRio)
+    public static final int SOL_CAMERA_LIGHT_RING = 4;
+    public static final int SOL_INDICATOR_LIGHT_RED = 1;
+    public static final int SOL_INDICATOR_LIGHT_WHITE = 2;
+    public static final int SOL_INDICATOR_LIGHT_BLUE = 3;
     
 }
