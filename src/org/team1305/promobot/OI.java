@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.team1305.promobot.commands.CameraIndicatorLightOn;
 import org.team1305.promobot.commands.DriveArcadeMode;
 import org.team1305.promobot.commands.DriveArcadeWithSmoothing;
 
@@ -49,11 +50,25 @@ public class OI {
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
-    private Button btnEnableSmoothing = new JoystickButton(driveStick, 1);
-    private Button btnDisableSmoothing = new JoystickButton(driveStick, 2);
-    public OI(){
-    btnEnableSmoothing.whenPressed(new DriveArcadeWithSmoothing());
-    btnDisableSmoothing.whenPressed(new DriveArcadeMode());
+    
+    Button  btnXEnableSmoothing         = new JoystickButton(driveStick, 1),
+            btnADisableSmoothing        = new JoystickButton(driveStick, 2),
+            btnB      = new JoystickButton(driveStick, 3),
+            btnY      = new JoystickButton(driveStick, 4),
+            btnLB     = new JoystickButton(driveStick, 5),
+            btnRB     = new JoystickButton(driveStick, 6),
+            btnLT     = new JoystickButton(driveStick, 7),
+            btnRT     = new JoystickButton(driveStick, 8),
+            btnBack   = new JoystickButton(driveStick, 9),
+            btnStartRedLight  = new JoystickButton(driveStick, 10),
+            btnLStick = new JoystickButton(driveStick, 11),
+            btnRStick = new JoystickButton(driveStick, 12);
+    
+    public OI()
+    {
+        btnXEnableSmoothing.whenPressed(new DriveArcadeWithSmoothing());
+        btnADisableSmoothing.whenPressed(new DriveArcadeMode());
+        btnStartRedLight.whenPressed(new CameraIndicatorLightOn());
     }
     public double getDriveStickValue() {
         if (invertDriveJoystickSignal)

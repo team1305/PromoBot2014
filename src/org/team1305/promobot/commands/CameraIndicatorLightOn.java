@@ -4,16 +4,20 @@
  */
 package org.team1305.promobot.commands;
 
+import edu.wpi.first.wpilibj.Solenoid;
+import org.team1305.promobot.RobotMap;
+
 /**
  *
  * @author Kim
  */
-public class CameraInactive extends CommandBase {
+public class CameraIndicatorLightOn extends CommandBase {
     
-    public CameraInactive() {
+    public CameraIndicatorLightOn() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(camera);
+        this.setTimeout(1);
     }
 
     // Called just before this Command runs the first time
@@ -22,12 +26,12 @@ public class CameraInactive extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        camera.SetIndicatorLights(false, false, false);
+        camera.SetIndicatorLights(true, false, false);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true

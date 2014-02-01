@@ -56,6 +56,11 @@ public class Camera extends Subsystem {
     int verticalTargets[] = new int[MAX_PARTICLES];
     int horizontalTargets[] = new int[MAX_PARTICLES];
     int verticalTargetCount, horizontalTargetCount;
+    
+    Solenoid redLight = new Solenoid(RobotMap.SOL_INDICATOR_LIGHT_RED);
+    Solenoid whiteLight = new Solenoid(RobotMap.SOL_INDICATOR_LIGHT_WHITE);
+    Solenoid blueLight = new Solenoid(RobotMap.SOL_INDICATOR_LIGHT_BLUE);
+    
         
     public class Scores {
         double rectangularity;
@@ -94,6 +99,13 @@ public class Camera extends Subsystem {
         //SmartDashboard.putData("Feeder Status", limit.get());
     }
     
+    public void SetIndicatorLights(boolean redLightOn, boolean whiteLightOn, boolean blueLightOn)
+    {
+        redLight.set(redLightOn);
+        whiteLight.set(whiteLightOn);
+        blueLight.set(blueLightOn);
+                
+    }
     public void analyzeImage(){
         System.out.println("---Begin Camera report--- done = " + done);
        //waitASec(2); 
