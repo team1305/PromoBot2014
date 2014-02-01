@@ -53,14 +53,14 @@ public class OI {
     
     Button  btnXEnableSmoothing         = new JoystickButton(driveStick, 1),
             btnADisableSmoothing        = new JoystickButton(driveStick, 2),
-            btnB      = new JoystickButton(driveStick, 3),
+            btnBStartRedLight      = new JoystickButton(driveStick, 3),
             btnY      = new JoystickButton(driveStick, 4),
             btnLB     = new JoystickButton(driveStick, 5),
             btnRB     = new JoystickButton(driveStick, 6),
             btnLT     = new JoystickButton(driveStick, 7),
             btnRT     = new JoystickButton(driveStick, 8),
             btnBack   = new JoystickButton(driveStick, 9),
-            btnStartRedLight  = new JoystickButton(driveStick, 10),
+            btnStart  = new JoystickButton(driveStick, 10),
             btnLStick = new JoystickButton(driveStick, 11),
             btnRStick = new JoystickButton(driveStick, 12);
     
@@ -68,7 +68,7 @@ public class OI {
     {
         btnXEnableSmoothing.whenPressed(new DriveArcadeWithSmoothing());
         btnADisableSmoothing.whenPressed(new DriveArcadeMode());
-        btnStartRedLight.whenPressed(new CameraIndicatorLightOn());
+        btnBStartRedLight.whenPressed(new CameraIndicatorLightOn());
     }
     public double getDriveStickValue() {
         if (invertDriveJoystickSignal)
