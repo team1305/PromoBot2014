@@ -61,7 +61,7 @@ public class Camera extends Subsystem {
     Solenoid redLight = new Solenoid(RobotMap.SOL_INDICATOR_LIGHT_RED);
     Solenoid whiteLight = new Solenoid(RobotMap.SOL_INDICATOR_LIGHT_WHITE);
     Solenoid blueLight = new Solenoid(RobotMap.SOL_INDICATOR_LIGHT_BLUE);
-    
+    private Solenoid cameraLight = new Solenoid(RobotMap.SOL_CAMERA_LIGHT_RING);
     boolean isAlreadyRunning = false;
         
     public class Scores {
@@ -100,7 +100,16 @@ public class Camera extends Subsystem {
     public void updateStatus(){
         //SmartDashboard.putData("Feeder Status", limit.get());
     }
-    
+    public void SetCameraLight(boolean state)
+    {
+        cameraLight.set(state);
+        
+    }
+    public void ToggleCameraLight()
+    {
+       cameraLight.set(!cameraLight.get()) ;
+        
+    }
     public void SetIndicatorLights(boolean redLightOn, boolean whiteLightOn, boolean blueLightOn)
     {
         redLight.set(redLightOn);

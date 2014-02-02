@@ -9,6 +9,7 @@ import org.team1305.promobot.commands.CameraIndicatorLightOn;
 import org.team1305.promobot.commands.DriveArcadeMode;
 import org.team1305.promobot.commands.DriveArcadeWithSmoothing;
 import org.team1305.promobot.commands.CameraActive;
+import org.team1305.promobot.commands.CameraToggleRing;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -71,6 +72,7 @@ public class OI {
         btnADisableSmoothing.whenPressed(new DriveArcadeMode());
         btnBStartRedLight.whenPressed(new CameraIndicatorLightOn());
         btnYAnalyzeImage.whenPressed(new CameraActive());
+        btnStart.whenPressed(new CameraToggleRing());
     }
     public double getDriveStickValue() {
         if (invertDriveJoystickSignal)
