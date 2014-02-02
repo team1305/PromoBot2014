@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.team1305.promobot.commands.CameraIndicatorLightOn;
 import org.team1305.promobot.commands.DriveArcadeMode;
 import org.team1305.promobot.commands.DriveArcadeWithSmoothing;
+import org.team1305.promobot.commands.CameraActive;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -51,10 +52,10 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
     
-    Button  btnXEnableSmoothing         = new JoystickButton(driveStick, 1),
-            btnADisableSmoothing        = new JoystickButton(driveStick, 2),
-            btnBStartRedLight      = new JoystickButton(driveStick, 3),
-            btnY      = new JoystickButton(driveStick, 4),
+    Button  btnXEnableSmoothing         = new JoystickButton(driveStick, 3),
+            btnADisableSmoothing        = new JoystickButton(driveStick, 1),
+            btnBStartRedLight      = new JoystickButton(driveStick, 2),
+            btnYAnalyzeImage      = new JoystickButton(driveStick, 4),
             btnLB     = new JoystickButton(driveStick, 5),
             btnRB     = new JoystickButton(driveStick, 6),
             btnLT     = new JoystickButton(driveStick, 7),
@@ -69,6 +70,7 @@ public class OI {
         btnXEnableSmoothing.whenPressed(new DriveArcadeWithSmoothing());
         btnADisableSmoothing.whenPressed(new DriveArcadeMode());
         btnBStartRedLight.whenPressed(new CameraIndicatorLightOn());
+        btnYAnalyzeImage.whenPressed(new CameraActive());
     }
     public double getDriveStickValue() {
         if (invertDriveJoystickSignal)

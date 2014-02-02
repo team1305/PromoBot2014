@@ -7,6 +7,7 @@ package org.team1305.promobot.subsystems;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.camera.AxisCamera;
+import edu.wpi.first.wpilibj.camera.AxisCameraException;
 import edu.wpi.first.wpilibj.image.BinaryImage;
 import edu.wpi.first.wpilibj.image.ColorImage;
 import edu.wpi.first.wpilibj.image.CriteriaCollection;
@@ -61,6 +62,7 @@ public class Camera extends Subsystem {
     Solenoid whiteLight = new Solenoid(RobotMap.SOL_INDICATOR_LIGHT_WHITE);
     Solenoid blueLight = new Solenoid(RobotMap.SOL_INDICATOR_LIGHT_BLUE);
     
+    boolean isAlreadyRunning = false;
         
     public class Scores {
         double rectangularity;
@@ -114,6 +116,9 @@ public class Camera extends Subsystem {
        }
        else
        {
+           done = false;
+           this.SetIndicatorLights(false, true, false);
+                      
            try {
               /**
               * Do the image capture with the camera and apply the algorithm described above. This
@@ -121,9 +126,10 @@ public class Camera extends Subsystem {
               * level directory in the flash memory on the cRIO. The file name in this case is "testImage.jpg"
               * 
               */
-             //ColorImage image = camera.getImage();     // comment if using stored images
-             ColorImage image;                           // next 2 lines read image from flash on cRIO
-             image = new RGBImage("/testImage.jpg");		// get the sample image from the cRIO flash
+           
+                ColorImage image = camera.getImage();     // comment if using stored images
+             //ColorImage image;                           // next 2 lines read image from flash on cRIO
+             //image = new RGBImage("/testImage.jpg");		// get the sample image from the cRIO flash
              BinaryImage thresholdImage = image.thresholdHSV(105, 137, 230, 255, 133, 183);   // keep only green objects
              //thresholdImage.write("/threshold.bmp");
              BinaryImage filteredImage = thresholdImage.particleFilter(cc);           // filter out small particles
@@ -213,9 +219,11 @@ public class Camera extends Subsystem {
                                  {
                                          System.out.println("Hot target located");
                                          System.out.println("Distance: " + distance);
+                                         this.SetIndicatorLights(true, false, false);
                                  } else {
                                          System.out.println("No hot target present");
                                          System.out.println("Distance: " + distance);
+                                         this.SetIndicatorLights(false, false, true);
                                  }
                          }
                 }
@@ -232,6 +240,10 @@ public class Camera extends Subsystem {
             } catch (NIVisionException ex) {
                 ex.printStackTrace();
             }
+           catch(AxisCameraException ex) {
+                ex.printStackTrace();
+                   }
+           
         
         System.out.println("---about to put to SmartDashboard---");
 //        SmartDashboard.putNumber(RobotMap.cameraXAxisOffsetShareName, xOffset);
