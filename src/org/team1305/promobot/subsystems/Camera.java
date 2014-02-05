@@ -133,7 +133,19 @@ public class Camera extends Subsystem {
                 System.out.println("---Camera already running - try again later ---");
              //ColorImage image;                           // next 2 lines read image from flash on cRIO
              //image = new RGBImage("/testImage.jpg");		// get the sample image from the cRIO flash
-             BinaryImage thresholdImage = image.thresholdHSV(105, 137, 230, 255, 133, 183);   // keep only green objects
+                
+                 //************************
+             final int HUE_MIN = 85;
+            final int HUE_MAX = 172;
+            final int SATURATION_MIN = 0;
+            final int SATURATION_MAX = 255;
+            final int LUMINANCE_MIN = 148;
+            final int LUMINANCE_MAX = 255;
+
+             //************************
+            BinaryImage thresholdImage = image.thresholdHSL(HUE_MIN, HUE_MAX, SATURATION_MIN, SATURATION_MAX, LUMINANCE_MIN, LUMINANCE_MAX);
+            
+             //BinaryImage thresholdImage = image.thresholdHSV(105, 137, 230, 255, 133, 183);   // keep only green objects
              //thresholdImage.write("/threshold.bmp");
              BinaryImage filteredImage = thresholdImage.particleFilter(cc);           // filter out small particles
              //filteredImage.write("/filteredImage.bmp");
