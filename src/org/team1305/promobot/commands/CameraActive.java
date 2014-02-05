@@ -18,7 +18,7 @@ public class CameraActive extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        this.setTimeout(50);
+        this.setTimeout(15);
     }
 
     // Called repeatedly when this Command is scheduled to run

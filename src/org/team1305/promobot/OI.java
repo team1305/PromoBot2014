@@ -73,7 +73,11 @@ public class OI {
         btnYAnalyzeImage.whenPressed(new CameraActive());
     }
     public double getDriveStickValue() {
-        if (invertDriveJoystickSignal)
+        if (Math.abs(driveStick.getY()) < RobotMap.JOYSTICK_DEAD_BAND)
+                {
+                    return 0;
+                }
+        else if (invertDriveJoystickSignal)
         {
             return driveStick.getY() * -1;
         }

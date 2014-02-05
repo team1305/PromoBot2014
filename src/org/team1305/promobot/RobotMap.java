@@ -21,6 +21,7 @@ public class RobotMap {
     //non-port-related constants
     public static double LOW_GEAR_SCALING_FACTOR = 0.6;
     public static final String CAMERA_IP = "10.13.5.11";
+    public static final double JOYSTICK_DEAD_BAND = 0.05;
     public static  final String cameraXAxisOffsetShareName = "X offset";
     public static  final String cameraYAxisOffsetShareName = "Y offset";
     public static final String cameraParticleCountShareName = "Camera Particle Count";

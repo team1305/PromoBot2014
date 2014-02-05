@@ -61,6 +61,7 @@ public class Camera extends Subsystem {
     Solenoid redLight = new Solenoid(RobotMap.SOL_INDICATOR_LIGHT_RED);
     Solenoid whiteLight = new Solenoid(RobotMap.SOL_INDICATOR_LIGHT_WHITE);
     Solenoid blueLight = new Solenoid(RobotMap.SOL_INDICATOR_LIGHT_BLUE);
+    Solenoid cameraLights = new Solenoid(RobotMap.SOL_CAMERA_LIGHT_RING);
     
     boolean isAlreadyRunning = false;
         
@@ -85,9 +86,10 @@ public class Camera extends Subsystem {
     public Camera()
     {
        System.out.println("---newing up Camera ---");
-        //Relay cameraLights = new Relay(RobotMap.RELAY_CAMERALIGHTS);
-        
-             //camera = AxisCamera.getInstance();  // get an instance of the camera
+       
+        //cameraLights.set(Relay.Value.kReverse);
+                cameraLights.set(true);
+        camera = AxisCamera.getInstance();  // get an instance of the camera
         cc = new CriteriaCollection();      // create the criteria for the particle filter
         cc.addCriteria(NIVision.MeasurementType.IMAQ_MT_AREA, AREA_MINIMUM, 65535, false);
         
@@ -109,7 +111,7 @@ public class Camera extends Subsystem {
                 
     }
     public void analyzeImage(){
-        System.out.println("---Begin Camera report--- done = " + done);
+        //System.out.println("---Begin Camera report--- done = " + done);
        //waitASec(2); 
        if (isAlreadyRunning()){
            System.out.println("---Camera already running - try again later ---");
@@ -128,17 +130,21 @@ public class Camera extends Subsystem {
               */
            
                 ColorImage image = camera.getImage();     // comment if using stored images
+                System.out.println("---Camera already running - try again later ---");
              //ColorImage image;                           // next 2 lines read image from flash on cRIO
              //image = new RGBImage("/testImage.jpg");		// get the sample image from the cRIO flash
              BinaryImage thresholdImage = image.thresholdHSV(105, 137, 230, 255, 133, 183);   // keep only green objects
              //thresholdImage.write("/threshold.bmp");
              BinaryImage filteredImage = thresholdImage.particleFilter(cc);           // filter out small particles
              //filteredImage.write("/filteredImage.bmp");
-
-             //iterate through each particle and score to see if it is a target
+            System.out.println("--- after particle Filter ---");
+            
+            //iterate through each particle and score to see if it is a target
              Scores scores[] = new Scores[filteredImage.getNumberParticles()];
              horizontalTargetCount = verticalTargetCount = 0;
-
+             System.out.println("--- number of particles is on next output line ---");
+            System.out.println(filteredImage.getNumberParticles());
+            
              if(filteredImage.getNumberParticles() > 0)
              {
                 for (int i = 0; i < MAX_PARTICLES && i < filteredImage.getNumberParticles(); i++) {
@@ -233,16 +239,27 @@ public class Camera extends Subsystem {
                  * of C data structures. Not calling free() will cause the memory to accumulate over
                  * each pass of this loop.
                  */
+             
+             System.out.println("--- done analysis - about to free Images ---");
                 filteredImage.free();
                 thresholdImage.free();
                 image.free();
                 
             } catch (NIVisionException ex) {
+                System.out.println("---NIVision exception---");
+                System.out.println(ex.getMessage());
                 ex.printStackTrace();
             }
            catch(AxisCameraException ex) {
+               System.out.println("---Axis Camera exception---");
+               System.out.println(ex.getMessage());
                 ex.printStackTrace();
                    }
+           catch (Exception ex) {
+               System.out.println("---some other exception---");
+               System.out.println(ex.getMessage());
+               ex.printStackTrace();
+           }
            
         
         System.out.println("---about to put to SmartDashboard---");
