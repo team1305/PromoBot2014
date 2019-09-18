@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.team1305.promobot.commands.ToggleLights;
+import org.team1305.promobot.commands.CameraIndicatorLightOn;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -22,6 +23,7 @@ public class OI {
     private final Button btnToggleLights = new JoystickButton(driveStick, 1);
     
     public OI(){
+
         btnToggleLights.whenPressed(new ToggleLights());
     }
     
