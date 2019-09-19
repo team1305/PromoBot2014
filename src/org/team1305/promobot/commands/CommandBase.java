@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.team1305.promobot.OI;
 import org.team1305.promobot.subsystems.DriveBase;
 import org.team1305.promobot.subsystems.Lights;
-import org.team1305.promobot.subsystems.Camera;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -17,8 +16,6 @@ public abstract class CommandBase extends Command {
     public static OI oi;
     public static DriveBase driveBase = new DriveBase();
     public static Lights light = new Lights();
-    
-    public static Camera camera = new Camera();
         
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
